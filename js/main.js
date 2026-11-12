@@ -235,6 +235,8 @@ function clearChoices() {
     $notesForm.reset()
     document.getElementById("notes-fieldset").disabled = true
     document.getElementById("profile").hidden = true
+    // reset the cat fact from step 5
+    $factOutput.textContent = "Click the button to get a random cat fact."
 
     $status.textContent = "Page reset completed."
 
@@ -244,3 +246,39 @@ function clearChoices() {
   }
 }
 
+// Week 10 - Step 5 - Independednt API Call using Fetch
+const $factButton = document.getElementById("get-fact")
+const $factOutput = document.getElementById("fact")
+
+$factButton.addEventListener("click", fetchCatFact)
+
+async function fetchCatFact() {
+  $factButton.disabled = true
+  $factOutput.textContent = "Loading a cat fact..."
+  try {
+    const $response = await fetch("https://catfact.ninja/fact")
+    const $data = await $response.json()
+    $factOutput.textContent = $data.fact
+  } catch (error) {
+    console.error(error)
+    $factOutput.textContent = "Unable to load a cat fact. Pelase refresh and try again."
+  }
+  $factButton.disabled = false
+}
+
+// Additional Example of using an API
+/* async function fetchPhotos() {
+  try {
+    const $response = await fetch("https://science.nasa.gov/wp-json/wp/v2/apod-basic/?api_key=DEMO_KEY")
+    const $data = await $response.json()
+    console.log($data)
+    for (let $index = 0; $index < 9; $index++) {
+      const $img = $data[$index]
+      $factOutput.insertAdjacentHTML("beforeend", `<img src="${$img.hdurl}" width="150">`)
+    }
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+fetchPhotos() */
