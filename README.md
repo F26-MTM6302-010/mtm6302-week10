@@ -1,2 +1,2 @@
-# Week 9 - HTML Events & Form Handling
-Week 9 in-class demo files
+# Week 10 - LocalStorage and Fetch
+Week 10 - Continuation of Week 9
